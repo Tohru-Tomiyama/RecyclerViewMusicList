@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RecyclerViewTest4</string>
+    <string name="btn_list_add">Add PlayList</string>
+    <string name="btn_music_add">Add Music</string>
+</resources>
