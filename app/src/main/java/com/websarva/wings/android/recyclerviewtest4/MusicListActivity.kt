@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicListActivity : AppCompatActivity() {
@@ -23,6 +25,19 @@ class MusicListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_list)
 
+        //RecyclerViewを取得
+        val recyclerview2 = findViewById<RecyclerView>(R.id.musicList)
+        //LinearLayoutManagerオブジェクトを生成
+        val layout = LinearLayoutManager(this@MusicListActivity)
+        //RecyclerViewにレイアウトマネージャーとしてLinearLayoutを設定
+        recyclerview2.layoutManager = layout
+        //アダプタオブジェクトを生成
+        //RecyclerViewにアダプタオブジェクトを設定
+        recyclerview2.adapter = adapter
+        //区切り専用オブジェクトを生成
+        val decorator = DividerItemDecoration(this@MusicListActivity, layout.orientation)
+        //RecyclerViewに区切り線オブジェクトを設定
+        recyclerview2.addItemDecoration(decorator)
 
     }
 
@@ -32,10 +47,9 @@ class MusicListActivity : AppCompatActivity() {
         list.forEach{
             var musicTitle = it.title as String
             var musicArtist = it.artist as String
-            val music = mutableMapOf<String, Any>("title" to musicTitle, "artist" to musicArtist)
+            var music = mutableMapOf<String, Any>("title" to musicTitle, "artist" to musicArtist)
             musicList.add(music)
         }
-
         return musicList
     }
 
@@ -95,6 +109,7 @@ class MusicListActivity : AppCompatActivity() {
         }
     }
 
+    /*
     private inner class ItemClickListener : View.OnClickListener{
         override fun onClick(view: View) {
             val musicName = view.findViewById<TextView>(R.id.musicName)
@@ -102,4 +117,5 @@ class MusicListActivity : AppCompatActivity() {
             Toast.makeText(this@MusicListActivity, music, Toast.LENGTH_SHORT).show()
         }
     }
+     */
 }
