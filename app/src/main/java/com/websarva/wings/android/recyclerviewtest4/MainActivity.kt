@@ -36,11 +36,11 @@ class MainActivity : AppCompatActivity() {
         val btClick = findViewById<Button>(R.id.addButton)
 
         btClick.setOnClickListener{
-            val musicList = arrayListOf<Music>()
+            var musicList: ArrayList<Music> = arrayListOf()
             val music = Music("New", "New")
             musicList.add(music)
-            val newlist = mutableMapOf<String, Any>("listName" to "new playlist", "musicList" to musicList)
-            playList.add(newlist)
+            val newList = mutableMapOf<String, Any>("listName" to "new playlist", "musicList" to musicList)
+            playList.add(newList)
             adapter.notifyDataSetChanged()
         }
 
@@ -48,8 +48,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createPlayList(): MutableList<MutableMap<String, Any>> {
-        val playList: MutableList<MutableMap<String, Any>> = mutableListOf()
-        val musicList = arrayListOf<Music>()
+        var playList: MutableList<MutableMap<String, Any>> = mutableListOf()
+        //val musicList = arrayListOf<Music>()
+        var musicList: ArrayList<Music> = arrayListOf()
         var music = Music("群青", "YOASOBI")
         musicList.add(music)
         music = Music("irony", "ClariS")
@@ -102,11 +103,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             holder._listNameRow.setOnClickListener{
-                var listMap = playList[position]
+                var listMap = playList[position] as MutableMap<String, Any>
                 var list = listMap[listTitle] as ArrayList<Music>
                 val intent2MusicList = Intent(this@MainActivity, MusicListActivity::class.java)
                 startActivity(intent2MusicList)
-                intent2MusicList.putExtra(MusicListActivity.KEY_STATE,list)
+                intent2MusicList.putExtra("playList", list)
             }
 
         }

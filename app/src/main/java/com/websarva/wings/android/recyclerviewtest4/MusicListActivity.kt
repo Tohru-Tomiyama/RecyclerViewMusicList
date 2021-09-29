@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicListActivity : AppCompatActivity() {
+    /*
     companion object {
         val KEY_STATE = "playList"
     }
 
-    val list = intent.getSerializableExtra(KEY_STATE) as ArrayList<Music>
+     */
+
+    val list = intent.getSerializableExtra("playList") as ArrayList<Music>
     val musicList = list?.let { createMusicList(it) }
     private val adapter = RecyclerListAdapter(musicList)
 
